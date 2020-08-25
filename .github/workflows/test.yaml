@@ -21,4 +21,4 @@ jobs:
         with:
           node-version: '12.x'
       - name: Run Test
-        run: yarn | yarn test lint
+        run: yarn && yarn test lint
