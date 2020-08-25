@@ -4,6 +4,12 @@
     "noEmit": true
   },
   "references": [
-    {"path": ".."}
+    {
+      "path": ".."
+    }
+  ],
+  "include": [
+    "./**/*",
+    "../src/**/*"
   ]
 }

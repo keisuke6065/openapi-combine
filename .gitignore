@@ -1,3 +1,22 @@
+### IntelliJ IDEA ###
+.idea/
+.idea/artifacts
+.idea/libraries
+.idea/dataSources
+.idea/httpRequests
+.idea/dictionaries
+.idea/sonarlint
+.idea/shelf
+.idea/inspectionProfiles
+.idea/.name
+.idea/*.xml
+!/.idea/
+!/.idea/codeStyles/
+*.iws
+*.iml
+*.ipr
+/out/
+
 *-debug.log
 *-error.log
 /.nyc_output
@@ -5,4 +24,5 @@
 /lib
 /package-lock.json
 /tmp
+/build
 node_modules
