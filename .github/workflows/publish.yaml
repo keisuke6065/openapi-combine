@@ -7,6 +7,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: Set release version
+        id: release_version
+        run: |
+          echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\/v}
       # Setup .npmrc file to publish to npm
       - uses: actions/setup-node@v1
         with:
@@ -22,5 +26,5 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
           repository: keisuke6065/openapi-combine
-          tags: ${{ GITHUB_REF/refs\/tags\/v }}
-          build_args: version=${{ GITHUB_REF/refs\/tags\/v }}
+          tags: ${{ steps.get_tag_name.outputs.VERSION }}
+          build_args: version=${{ steps.get_tag_name.outputs.VERSION }}
