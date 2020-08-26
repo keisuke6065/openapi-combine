@@ -25,5 +25,7 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
           repository: keisuke6065/openapi-combine
-          tag: ${{ steps.get_tag_name.outputs.VERSION }}
+          tags: ${{ steps.get_tag_name.outputs.VERSION }}
           build_args: version=${{ steps.get_tag_name.outputs.VERSION }}
+          push: true
+          add_git_labels: true
