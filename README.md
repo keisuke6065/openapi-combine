@@ -2,7 +2,7 @@ openapi-combine
 ===============
 
 
-
+![test CI](https://github.com/keisuke6065/openapi-combine/workflows/test%20CI/badge.svg?branch=master)
 [![oclif](https://img.shields.io/badge/cli-oclif-brightgreen.svg)](https://oclif.io)
 [![Version](https://img.shields.io/npm/v/openapi-combine.svg)](https://npmjs.org/package/openapi-combine)
 [![Downloads/week](https://img.shields.io/npm/dw/openapi-combine.svg)](https://npmjs.org/package/openapi-combine)
@@ -63,4 +63,6 @@ OPTIONS
 EXAMPLE
   $ openapi-combine merge -i ./example/openapi.yaml -o ./build/openapi.yaml
 ```
+
+_See code: [lib/commands/merge.js](https://github.com/keisuke6065/openapi-combine/blob/v0.0.0/lib/commands/merge.js)_
 <!-- commandsstop -->
