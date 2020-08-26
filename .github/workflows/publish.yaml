@@ -19,8 +19,6 @@ jobs:
       - run: yarn publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-
-docker:
   docker:
     runs-on: ubuntu-latest
     needs: npm
