@@ -9,7 +9,7 @@ openapi-combine
 [![License](https://img.shields.io/npm/l/openapi-combine.svg)](https://github.com/keisuke6065/openapi-combine/blob/master/package.json)
 
 <!-- toc -->
-* [Features](#Features)
+* [Features](#features)
 * [Usage](#usage)
 * [Commands](#commands)
 <!-- tocstop -->
@@ -50,7 +50,7 @@ $ npm install -g openapi-combine
 $ openapi-combine COMMAND
 running command...
 $ openapi-combine (-v|--version|version)
-openapi-combine/0.0.0 darwin-x64 node-v12.18.3
+openapi-combine/0.1.0 darwin-x64 node-v12.18.3
 $ openapi-combine --help [COMMAND]
 USAGE
   $ openapi-combine COMMAND
@@ -95,5 +95,5 @@ EXAMPLE
   $ openapi-combine merge -i ./example/openapi.yaml -o ./build/openapi.yaml
 ```
 
-_See code: [lib/commands/merge.js](https://github.com/keisuke6065/openapi-combine/blob/v0.0.0/lib/commands/merge.js)_
+_See code: [lib/commands/merge.js](https://github.com/keisuke6065/openapi-combine/blob/v0.1.0/lib/commands/merge.js)_
 <!-- commandsstop -->
