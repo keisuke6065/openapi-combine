@@ -27,11 +27,10 @@ export default class Merge extends Command {
     ),
   }
 
-  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-  async run() {
-    cli.action.start('starting');
+  async run(): Promise<void> {
+    cli.action.start('Starting');
     const {flags} = this.parse(Merge)
     await mergeExecutor(flags.input, flags.output)
-    cli.action.stop('done');
+    cli.action.stop('Done');
   }
 }

@@ -4,22 +4,19 @@ get:
   tags:
     - pets
   parameters:
-    - name: petId
-      in: path
-      required: true
-      description: The id of the pet to retrieve
-      schema:
-        type: string
+    $refs:
+      - ./paths/parameters/limit.yaml
+      - ./paths/parameters/page.yaml
   responses:
     '200':
       description: Expected response to a valid request
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/Pet"
+            $ref: "#/components/components/Pet"
     default:
       description: unexpected error
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/Error"
+            $ref: "#/components/components/Error"

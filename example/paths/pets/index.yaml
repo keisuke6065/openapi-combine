@@ -4,13 +4,9 @@ get:
   tags:
     - pets
   parameters:
-    - name: limit
-      in: query
-      description: How many items to return at one time (max 100)
-      required: false
-      schema:
-        type: integer
-        format: int32
+    $refs:
+      - ./paths/parameters/limit.yaml
+      - ./paths/parameters/page.yaml
   responses:
     '200':
       description: A paged array of pets
@@ -22,13 +18,13 @@ get:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/Pets"
+            $ref: "#/components/components/Pets"
     default:
       description: unexpected error
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/Error"
+            $ref: "#/components/components/Error"
 post:
   summary: Create a pet
   operationId: createPets
@@ -42,4 +38,4 @@ post:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/Error"
+            $ref: "#/components/components/Error"

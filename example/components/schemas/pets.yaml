@@ -1,0 +1,4 @@
+Pets:
+  type: array
+  items:
+    $ref: "#/components/schemas/Pet"

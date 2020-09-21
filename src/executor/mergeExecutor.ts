@@ -3,30 +3,30 @@ import {resolveRefs} from "json-refs";
 import fs from "fs";
 import path from "path";
 import mkdirp from "mkdirp";
+import {IObject, resolveCustomRefs} from "../util/refs";
 
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-export async function mergeExecutor(
+const options = {
+  filter: ['relative', 'remote'],
+  loaderOptions: {
+    processContent: async function (res: any, callback: any) {
+      const loadRefObject = safeLoad(res.text) as IObject;
+      callback(resolveCustomRefs(loadRefObject));
+    }
+  }
+};
+
+export const mergeExecutor = async (
   inputFile: string,
   outputFile: string
-) {
-  const options = {
-    filter: ['relative', 'remote'],
-    loaderOptions: {
-      processContent: function (res: any, callback: any) {
-        callback(safeLoad(res.text));
-      }
-    }
-  };
+): Promise<void> => {
   const baseDir = process.cwd()
   const inputParsedPath = path.parse(inputFile);
-
-  const x = path.join(baseDir, inputParsedPath.dir, inputParsedPath.base)
+  const targetFilePath = path.join(baseDir, inputParsedPath.dir, inputParsedPath.base)
   process.chdir(inputParsedPath.dir);
-
-  const root = safeLoad(fs.readFileSync(x).toString());
-  const refs = await resolveRefs([root], options);
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  const resolved = refs.resolved as object[]
+  const root = safeLoad(fs.readFileSync(targetFilePath).toString()) as IObject;
+  const newVar = resolveCustomRefs(root);
+  const refs = await resolveRefs([newVar], options);
+  const resolved = refs.resolved as any[]
   process.chdir(baseDir);
   const outputParsedPath = path.parse(outputFile);
   await mkdirp(outputParsedPath.dir)
@@ -34,4 +34,5 @@ export async function mergeExecutor(
     path.join(outputParsedPath.dir, outputParsedPath.base),
     safeDump(resolved[0]), {encoding: "utf8"}
   )
-}
+};
+

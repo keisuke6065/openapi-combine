@@ -9,9 +9,40 @@ openapi-combine
 [![License](https://img.shields.io/npm/l/openapi-combine.svg)](https://github.com/keisuke6065/openapi-combine/blob/master/package.json)
 
 <!-- toc -->
+* [Features](#Features)
 * [Usage](#usage)
 * [Commands](#commands)
 <!-- tocstop -->
+# Features
+Supports `$ref` Syntax and `$refs` Extended syntax  
+`$ref` supports based on [rfc3986](https://tools.ietf.org/html/rfc3986)    
+The extended syntax of `$refs` is a syntax that can have `$ref` as an array  
+
+## Extended syntax usage examples
+Define multiple `$ref` references using `$refs` as shown below
+(Currently only Local Reference support)
+
+```yaml
+openapi: "3.0.0"
+info:
+  version: 1.0.0
+  title: examples
+servers:
+  - url: http://petstore.swagger.io/v1
+paths:
+  /pets/{petId}:
+    $ref: ./paths/pets/id/index.yaml
+components:
+  schemas:
+    $refs:
+      - ./components/schemas/pet.yaml
+      - ./components/schemas/pets.yaml
+    Error:
+      $ref: ./components/schemas/error.yaml
+```
+see convert example [example/openapi.yaml](example/openapi.yaml) -> [example/openapi.yaml](example/result.yaml)
+
+
 # Usage
 <!-- usage -->
 ```sh-session
