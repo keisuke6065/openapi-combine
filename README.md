@@ -7,6 +7,7 @@ openapi-combine
 [![Version](https://img.shields.io/npm/v/openapi-combine.svg)](https://npmjs.org/package/openapi-combine)
 [![Downloads/week](https://img.shields.io/npm/dw/openapi-combine.svg)](https://npmjs.org/package/openapi-combine)
 [![License](https://img.shields.io/npm/l/openapi-combine.svg)](https://github.com/keisuke6065/openapi-combine/blob/master/package.json)
+[![Docker Hub package](https://dockeri.co/image/keisuke6065/openapi-combine)](https://hub.docker.com/r/keisuke6065/openapi-combine)
 
 <!-- toc -->
 * [Features](#features)
