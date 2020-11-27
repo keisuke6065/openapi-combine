@@ -10,7 +10,7 @@ const options = {
   loaderOptions: {
     processContent: async function (res: any, callback: any) {
       const loadRefObject = safeLoad(res.text) as IObject;
-      callback(resolveCustomRefs(loadRefObject));
+      callback(await resolveCustomRefs(loadRefObject));
     }
   }
 };
