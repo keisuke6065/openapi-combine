@@ -1,6 +1,6 @@
 - name: page
   in: query
-  description: How many items to return at one time (max 100)
+  description: How many items to return at one time (max {{max}}{{^max}}100{{/max}})
   required: false
   schema:
     type: integer

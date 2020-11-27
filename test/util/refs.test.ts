@@ -11,7 +11,7 @@ describe('refs utils test', () => {
       "components": {"schemas": {"$refs": [testFilePath1, testFilePath2]}}
     }
     const expected = {
-      "value": [testFilePath1, testFilePath2],
+      "value": [{$ref: testFilePath1, $props: {}}, {$ref: testFilePath2, $props: {}}],
       "path": "components.schemas"
     }
     assert.deepEqual(getRefs(x), expected)
@@ -21,7 +21,7 @@ describe('refs utils test', () => {
       "components": [{"schemas": "xxx"}, {"schemas": {"$refs": [testFilePath1, testFilePath2]}}],
     }
     const expected = {
-      "value": [testFilePath1, testFilePath2],
+      "value": [{$ref: testFilePath1, $props: {}}, {$ref: testFilePath2, $props: {}}],
       "path": "components[1].schemas"
     }
     assert.deepEqual(getRefs(x), expected)
@@ -67,10 +67,10 @@ describe('refs utils test', () => {
       }
     }
 
-    assert.deepEqual(resolveCustomRefs(x), expected)
+    assert.deepEqual(await resolveCustomRefs(x), expected)
   });
   it("load file", async () => {
-    const x = [testFilePath1]
+    const x = [{$ref: testFilePath1, $props: {}}]
 
     const expected = {
       "Pet": {
@@ -83,6 +83,6 @@ describe('refs utils test', () => {
         }
       }
     }
-    assert.deepEqual(loadFile(x), expected)
+    assert.deepEqual(await loadFile(x), expected)
   });
 })

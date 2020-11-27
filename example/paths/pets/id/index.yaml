@@ -5,7 +5,9 @@ get:
     - pets
   parameters:
     $refs:
-      - ./paths/parameters/limit.yaml
+      - $ref: ./paths/parameters/limit.yaml
+        $props:
+          max: 1000
       - ./paths/parameters/page.yaml
   responses:
     '200':
