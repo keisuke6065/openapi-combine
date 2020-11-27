@@ -85,7 +85,7 @@ export const walkToReplaceProps = <T extends Record<string, null> | any[]>(node:
   } else if (typeof(node) === 'object') {
     for (const [key, value] of Object.entries<any>(node)) {
       if (Array.isArray(value)) {
-        (node as any)[key] = Array(value).map((it: any) => {
+        (value as any)[key] = Array(value).map((it: any) => {
           if (typeof(it) === 'string') {
             return render(it as string, props);
           } else if (typeof(it) === 'object') {
