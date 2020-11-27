@@ -1,4 +1,4 @@
-import fs from "fs";
+import {promises as fs} from "fs";
 import path from "path";
 import {safeLoad} from "js-yaml";
 import _get from "lodash.get";
@@ -49,41 +49,39 @@ export const getRefs = (theObject: IObject, p = ""): LinkResult => {
   };
 };
 
-export const loadFile = (refs: string[]): any => {
+export const loadFile = async (refs: string[]): Promise<any> => {
   const x = {}
   const y: any[] = []
-  refs.forEach(value => {
-    const buffer = fs.readFileSync(path.join(process.cwd(), value));
+  for (const value of refs) {
+    const buffer = await fs.readFile(path.join(process.cwd(), value));
     const load = safeLoad(buffer.toString());
     if (load instanceof Array) {
       y.push(load[0])
     } else {
       Object.assign(x, load)
     }
-
-  })
+  }
   return y.length !== 0 ? y : x;
 };
 
-export const resolveCustomRefs = (refs: IObject): any => {
+export const resolveCustomRefs = async (refs: IObject): Promise<any> => {
   let result;
   do {
     result = getRefs(refs);
     if (result.path && result.value) {
-      const jsonObject = loadFile(result.value);
+      const jsonObject = await loadFile(result.value);
       const get = _get(refs, result.path);
       delete get["$refs"]
       let resultRefsObject;
       if (jsonObject instanceof Array) {
         resultRefsObject = Object.assign([], jsonObject);
       } else {
-        resultRefsObject = Object.assign({}, jsonObject, get)
+        resultRefsObject = Object.assign({}, jsonObject, get);
       }
-      _set(refs, result.path, resultRefsObject)
+      _set(refs, result.path, resultRefsObject);
     } else {
       break
     }
-  } while (!result.path && !result.value)
-  return refs
+  } while (!result.path && !result.value);
+  return refs;
 };
-

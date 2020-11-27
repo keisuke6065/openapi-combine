@@ -1,6 +1,6 @@
 import {safeDump, safeLoad} from "js-yaml";
 import {resolveRefs} from "json-refs";
-import fs from "fs";
+import {promises as fs} from "fs";
 import path from "path";
 import mkdirp from "mkdirp";
 import {IObject, resolveCustomRefs} from "../util/refs";
@@ -23,14 +23,14 @@ export const mergeExecutor = async (
   const inputParsedPath = path.parse(inputFile);
   const targetFilePath = path.join(baseDir, inputParsedPath.dir, inputParsedPath.base)
   process.chdir(inputParsedPath.dir);
-  const root = safeLoad(fs.readFileSync(targetFilePath).toString()) as IObject;
-  const newVar = resolveCustomRefs(root);
+  const root = safeLoad((await fs.readFile(targetFilePath)).toString()) as IObject;
+  const newVar = await resolveCustomRefs(root);
   const refs = await resolveRefs([newVar], options);
   const resolved = refs.resolved as any[]
   process.chdir(baseDir);
   const outputParsedPath = path.parse(outputFile);
   await mkdirp(outputParsedPath.dir)
-  fs.writeFileSync(
+  await fs.writeFile(
     path.join(outputParsedPath.dir, outputParsedPath.base),
     safeDump(resolved[0]), {encoding: "utf8"}
   )
