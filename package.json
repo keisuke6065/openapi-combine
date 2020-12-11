@@ -27,7 +27,7 @@
     "@oclif/dev-cli": "^1.22.2",
     "@types/chai": "^4.2.14",
     "@types/mkdirp": "^1.0.1",
-    "@types/mocha": "^8.0.4",
+    "@types/mocha": "^8.2.0",
     "@types/sinon": "^9.0.9",
     "@typescript-eslint/eslint-plugin": "^3.10.0",
     "@typescript-eslint/parser": "^3.10.0",
