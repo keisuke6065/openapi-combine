@@ -51,7 +51,7 @@ $ npm install -g openapi-combine
 $ openapi-combine COMMAND
 running command...
 $ openapi-combine (-v|--version|version)
-openapi-combine/0.1.0 darwin-x64 node-v12.18.3
+openapi-combine/0.1.1 darwin-x64 node-v12.18.3
 $ openapi-combine --help [COMMAND]
 USAGE
   $ openapi-combine COMMAND
@@ -78,7 +78,7 @@ OPTIONS
   --all  see all commands in CLI
 ```
 
-_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v3.2.0/src/commands/help.ts)_
+_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v3.2.2/src/commands/help.ts)_
 
 ## `openapi-combine merge`
 
@@ -96,5 +96,5 @@ EXAMPLE
   $ openapi-combine merge -i ./example/openapi.yaml -o ./build/openapi.yaml
 ```
 
-_See code: [lib/commands/merge.js](https://github.com/keisuke6065/openapi-combine/blob/v0.1.0/lib/commands/merge.js)_
+_See code: [lib/commands/merge.js](https://github.com/keisuke6065/openapi-combine/blob/v0.1.1/lib/commands/merge.js)_
 <!-- commandsstop -->
