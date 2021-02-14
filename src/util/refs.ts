@@ -1,6 +1,6 @@
 import fs from "fs";
 import path from "path";
-import {safeLoad} from "js-yaml";
+import {load} from "js-yaml";
 import _get from "lodash.get";
 import _set from "lodash.set";
 
@@ -54,11 +54,11 @@ export const loadFile = (refs: string[]): any => {
   const y: any[] = []
   refs.forEach(value => {
     const buffer = fs.readFileSync(path.join(process.cwd(), value));
-    const load = safeLoad(buffer.toString());
-    if (load instanceof Array) {
-      y.push(load[0])
+    const loadData = load(buffer.toString());
+    if (loadData instanceof Array) {
+      y.push(loadData[0])
     } else {
-      Object.assign(x, load)
+      Object.assign(x, loadData)
     }
 
   })
