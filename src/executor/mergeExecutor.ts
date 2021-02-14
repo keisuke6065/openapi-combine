@@ -1,4 +1,4 @@
-import {safeDump, safeLoad} from "js-yaml";
+import {dump, load} from "js-yaml";
 import {resolveRefs} from "json-refs";
 import fs from "fs";
 import path from "path";
@@ -9,7 +9,7 @@ const options = {
   filter: ['relative', 'remote'],
   loaderOptions: {
     processContent: async function (res: any, callback: any) {
-      const loadRefObject = safeLoad(res.text) as IObject;
+      const loadRefObject = load(res.text) as IObject;
       callback(resolveCustomRefs(loadRefObject));
     }
   }
@@ -23,7 +23,7 @@ export const mergeExecutor = async (
   const inputParsedPath = path.parse(inputFile);
   const targetFilePath = path.join(baseDir, inputParsedPath.dir, inputParsedPath.base)
   process.chdir(inputParsedPath.dir);
-  const root = safeLoad(fs.readFileSync(targetFilePath).toString()) as IObject;
+  const root = load(fs.readFileSync(targetFilePath).toString()) as IObject;
   const newVar = resolveCustomRefs(root);
   const refs = await resolveRefs([newVar], options);
   const resolved = refs.resolved as any[]
@@ -32,7 +32,7 @@ export const mergeExecutor = async (
   await mkdirp(outputParsedPath.dir)
   fs.writeFileSync(
     path.join(outputParsedPath.dir, outputParsedPath.base),
-    safeDump(resolved[0]), {encoding: "utf8"}
+    dump(resolved[0]), {encoding: "utf8"}
   )
 };
 
