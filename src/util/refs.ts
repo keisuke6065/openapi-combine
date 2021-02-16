@@ -56,7 +56,7 @@ export const loadFile = (refs: string[]): any => {
     const buffer = fs.readFileSync(path.join(process.cwd(), value));
     const loadData = load(buffer.toString());
     if (loadData instanceof Array) {
-      y.push(loadData[0])
+      Array.prototype.push.apply(y, loadData)
     } else {
       Object.assign(x, loadData)
     }
