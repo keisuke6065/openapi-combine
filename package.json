@@ -21,7 +21,7 @@
     "lodash.set": "^4.3.2",
     "mkdirp": "^1.0.4",
     "tslib": "^2",
-    "typescript": "^4.1.5"
+    "typescript": "^4.3.5"
   },
   "devDependencies": {
     "@oclif/dev-cli": "^1.26.0",
