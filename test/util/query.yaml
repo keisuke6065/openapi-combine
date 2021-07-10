@@ -1,0 +1,8 @@
+- name: q
+  in: query
+  schema:
+    type: string
+- name: sort
+  in: query
+  schema:
+    type: string
