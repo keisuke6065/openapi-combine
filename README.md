@@ -51,7 +51,7 @@ $ npm install -g openapi-combine
 $ openapi-combine COMMAND
 running command...
 $ openapi-combine (-v|--version|version)
-openapi-combine/0.1.1 darwin-x64 node-v12.18.3
+openapi-combine/0.1.1 darwin-x64 node-v16.13.1
 $ openapi-combine --help [COMMAND]
 USAGE
   $ openapi-combine COMMAND
@@ -65,20 +65,20 @@ USAGE
 
 ## `openapi-combine help [COMMAND]`
 
-display help for openapi-combine
+Display help for openapi-combine.
 
 ```
 USAGE
   $ openapi-combine help [COMMAND]
 
 ARGUMENTS
-  COMMAND  command to show help for
+  COMMAND  Command to show help for.
 
 OPTIONS
-  --all  see all commands in CLI
+  -n, --nested-commands  Include all nested commands in the output.
 ```
 
-_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v3.2.2/src/commands/help.ts)_
+_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v5.1.12/src/commands/help.ts)_
 
 ## `openapi-combine merge`
 
@@ -89,8 +89,9 @@ USAGE
   $ openapi-combine merge
 
 OPTIONS
-  -i, --input=input    (required) input target yaml file
-  -o, --output=output  [default: ./output/openapi.yaml] output target yaml file
+  -i, --input=input       (required) input target yaml file
+  -o, --output=output     [default: ./output/openapi.yaml] output target yaml file
+  -t, --type=(yaml|json)  [default: yaml] output format yaml or json
 
 EXAMPLE
   $ openapi-combine merge -i ./example/openapi.yaml -o ./build/openapi.yaml

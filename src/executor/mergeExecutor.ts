@@ -4,6 +4,7 @@ import fs from "fs";
 import path from "path";
 import mkdirp from "mkdirp";
 import {IObject, resolveCustomRefs} from "../util/refs";
+import {OutputType} from '../commands/merge'
 
 const options = {
   filter: ['relative', 'remote'],
@@ -17,7 +18,8 @@ const options = {
 
 export const mergeExecutor = async (
   inputFile: string,
-  outputFile: string
+  outputFile: string,
+  type: OutputType
 ): Promise<void> => {
   const baseDir = process.cwd()
   const inputParsedPath = path.parse(inputFile);
@@ -30,9 +32,17 @@ export const mergeExecutor = async (
   process.chdir(baseDir);
   const outputParsedPath = path.parse(outputFile);
   await mkdirp(outputParsedPath.dir)
-  fs.writeFileSync(
-    path.join(outputParsedPath.dir, outputParsedPath.base),
-    dump(resolved[0]), {encoding: "utf8"}
-  )
+  console.log(resolved[0] as string)
+  if (type == 'json') {
+    fs.writeFileSync(
+      path.join(outputParsedPath.dir, outputParsedPath.base),
+      JSON.stringify(resolved[0]), {encoding: "utf8"}
+    )
+  } else if (type == 'yaml') {
+    fs.writeFileSync(
+      path.join(outputParsedPath.dir, outputParsedPath.base),
+      dump(resolved[0]), {encoding: "utf8"}
+    )
+  }
 };
 
