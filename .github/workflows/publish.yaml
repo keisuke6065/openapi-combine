@@ -5,15 +5,15 @@ on:
       - published
 
 jobs:
-  version-setting:
+  publish:
     runs-on: ubuntu-latest
-    outputs:
-      version: ${{ steps.ref_tag.outputs.version }}
     steps:
       - uses: actions/checkout@v2
+      # Setup .npmrc file to publish to npm
       - uses: actions/setup-node@v3
         with:
           node-version: '16.x'
+          registry-url: 'https://registry.npmjs.org'
       - name: Set tag version
         id: ref_tag
         run: echo "::set-output name=version::${GITHUB_REF##*v}"
@@ -30,18 +30,6 @@ jobs:
           branch: master
           message: "Bump version: v${{ steps.ref_tag.outputs.version }}"
           add: "['package.json', 'README.md']"
-  publish:
-    runs-on: ubuntu-latest
-    needs:
-      - version-setting
-    steps:
-      - uses: actions/checkout@v2
-      # Setup .npmrc file to publish to npm
-      - uses: actions/setup-node@v3
-        with:
-          node-version: '16.x'
-          registry-url: 'https://registry.npmjs.org'
-      - run: yarn
       - run: yarn publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
@@ -53,4 +41,4 @@ jobs:
           docker push keisuke6065/openapi-combine:$VERSION
           docker push keisuke6065/openapi-combine:latest
         env:
-          VERSION: ${{ needs.version-setting.outputs.version }}
+          VERSION: ${{ steps.ref_tag.outputs.version }}
