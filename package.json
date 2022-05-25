@@ -1,6 +1,6 @@
 {
   "name": "openapi-combine",
-  "version": "0.2.4",
+  "version": "0.3.0",
   "author": "keisuke.nakamura @keisuke6065",
   "bin": {
     "openapi-combine": "./bin/run"
