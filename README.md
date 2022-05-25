@@ -51,7 +51,7 @@ $ npm install -g openapi-combine
 $ openapi-combine COMMAND
 running command...
 $ openapi-combine (-v|--version|version)
-openapi-combine/0.2.2 linux-x64 node-v16.15.0
+openapi-combine/0.2.3 linux-x64 node-v16.15.0
 $ openapi-combine --help [COMMAND]
 USAGE
   $ openapi-combine COMMAND
