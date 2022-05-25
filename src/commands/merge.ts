@@ -1,4 +1,4 @@
-import {Command, flags} from '@oclif/command'
+import {Command, Flags} from '@oclif/core'
 import {mergeExecutor} from "../executor/mergeExecutor";
 import {cli} from "cli-ux";
 
@@ -14,21 +14,21 @@ export default class Merge extends Command {
   ]
 
   static flags = {
-    input: flags.string(
+    input: Flags.string(
       {
         char: 'i',
         description: 'input target yaml file',
         required: true,
       },
     ),
-    output: flags.string(
+    output: Flags.string(
       {
         char: 'o',
         description: 'output target yaml file',
         default: './output/openapi.yaml',
       },
     ),
-    type: flags.enum<OutputType>(
+    type: Flags.string(
       {
         options: ['yaml', 'json'],
         char: 't',
@@ -40,8 +40,8 @@ export default class Merge extends Command {
 
   async run(): Promise<void> {
     cli.action.start('Starting');
-    const {flags} = this.parse(Merge)
-    await mergeExecutor(flags.input, flags.output, flags.type)
+    const {flags} = await this.parse(Merge)
+    await mergeExecutor(<string>flags.input, <string>flags.output, <OutputType>flags.type)
     cli.action.stop('Done');
   }
 }
