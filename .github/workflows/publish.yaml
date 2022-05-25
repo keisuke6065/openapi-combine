@@ -11,9 +11,9 @@ jobs:
         id: release_version
         run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\/v}
       # Setup .npmrc file to publish to npm
-      - uses: actions/setup-node@v1
+      - uses: actions/setup-node@v3
         with:
-          node-version: '12.x'
+          node-version: '16.x'
           registry-url: 'https://registry.npmjs.org'
       - run: yarn
       - run: yarn publish
