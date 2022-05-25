@@ -51,7 +51,7 @@ $ npm install -g openapi-combine
 $ openapi-combine COMMAND
 running command...
 $ openapi-combine (-v|--version|version)
-openapi-combine/0.1.1 darwin-x64 node-v16.13.1
+openapi-combine/0.2.2 linux-x64 node-v16.15.0
 $ openapi-combine --help [COMMAND]
 USAGE
   $ openapi-combine COMMAND
@@ -96,6 +96,4 @@ OPTIONS
 EXAMPLE
   $ openapi-combine merge -i ./example/openapi.yaml -o ./build/openapi.yaml
 ```
-
-_See code: [lib/commands/merge.js](https://github.com/keisuke6065/openapi-combine/blob/v0.1.1/lib/commands/merge.js)_
 <!-- commandsstop -->
