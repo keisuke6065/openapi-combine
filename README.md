@@ -51,7 +51,7 @@ $ npm install -g openapi-combine
 $ openapi-combine COMMAND
 running command...
 $ openapi-combine (-v|--version|version)
-openapi-combine/0.2.3 linux-x64 node-v16.15.0
+openapi-combine/0.2.4 linux-x64 node-v16.15.0
 $ openapi-combine --help [COMMAND]
 USAGE
   $ openapi-combine COMMAND
@@ -89,9 +89,9 @@ USAGE
   $ openapi-combine merge
 
 OPTIONS
-  -i, --input=input       (required) input target yaml file
-  -o, --output=output     [default: ./output/openapi.yaml] output target yaml file
-  -t, --type=(yaml|json)  [default: yaml] output format yaml or json
+  -i, --input=input     (required) input target yaml file
+  -o, --output=output   [default: ./output/openapi.yaml] output target yaml file
+  -t, --type=yaml|json  [default: yaml] output format yaml or json
 
 EXAMPLE
   $ openapi-combine merge -i ./example/openapi.yaml -o ./build/openapi.yaml
