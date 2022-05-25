@@ -24,38 +24,29 @@ version-resolver:
   minor:
     labels:
       - 'minor'
+      - 'enhancement'
   patch:
     labels:
       - 'patch'
       - 'dependencies'
+      - 'bug'
   default: patch
 autolabeler:
   - label: 'chore'
-    branch:
-      - '/chore/.+/'
-  - label: 'documentation'
+    files:
+      - '*.md'
     branch:
       - '/docs{0,1}\/.+/'
+      - '/chore/.+/'
   - label: 'bug'
     branch:
       - '/bugfix\/.+/'
+      - '/bug\/.+/'
+    title:
+      - '/fix/i'
   - label: 'enhancement'
     branch:
       - '/feature\/.+/'
-  - label: 'breaking'
-    branch:
-      - '/destruct\/.+/'
-  - label: 'major'
-    branch:
-      - '/destruct\/.+/'
-  - label: 'minor'
-    branch:
-      - '/feature\/.+/'
-  - label: 'patch'
-    branch:
-      - '/docs{0,1}\/.+/'
-      - '/chore/.+/'
-      - '/bugfix\/.+/'
 exclude-labels:
   - 'skip-changelog'
 template: |
