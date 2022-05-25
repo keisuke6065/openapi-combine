@@ -1,4 +1,4 @@
-FROM node:12.18.3-alpine3.9
+FROM 16-slim
 LABEL maintainer="keisuke6065 <keisuke6065@gmail.com>"
 
 ARG VERSION
