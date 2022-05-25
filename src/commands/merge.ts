@@ -2,6 +2,9 @@ import {Command, flags} from '@oclif/command'
 import {mergeExecutor} from "../executor/mergeExecutor";
 import {cli} from "cli-ux";
 
+export type OutputType = 'yaml' | 'json';
+
+
 export default class Merge extends Command {
   static description = 'describe the command here'
 
@@ -25,12 +28,20 @@ export default class Merge extends Command {
         default: './output/openapi.yaml',
       },
     ),
+    type: flags.enum<OutputType>(
+      {
+        options: ['yaml', 'json'],
+        char: 't',
+        description: 'output format yaml or json',
+        default: 'yaml',
+      },
+    ),
   }
 
   async run(): Promise<void> {
     cli.action.start('Starting');
     const {flags} = this.parse(Merge)
-    await mergeExecutor(flags.input, flags.output)
+    await mergeExecutor(flags.input, flags.output, flags.type)
     cli.action.stop('Done');
   }
 }
