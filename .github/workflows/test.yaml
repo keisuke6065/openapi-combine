@@ -32,4 +32,4 @@ jobs:
       - name: Run Test
         run: yarn && yarn test lint
       - name: Run cli Test
-        run: yarn build && yarn merge -i ./example/openapi.yaml -o ./build/openapi.yaml -t yaml
+        run: yarn build && yarn start merge -i ./example/openapi.yaml -o ./build/openapi.yaml -t yaml
