@@ -32,7 +32,6 @@ export const mergeExecutor = async (
   process.chdir(baseDir);
   const outputParsedPath = path.parse(outputFile);
   await mkdirp(outputParsedPath.dir)
-  console.log(resolved[0] as string)
   if (type == 'json') {
     fs.writeFileSync(
       path.join(outputParsedPath.dir, outputParsedPath.base),
