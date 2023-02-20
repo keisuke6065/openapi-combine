@@ -7,7 +7,7 @@
   },
   "bugs": "https://github.com/keisuke6065/openapi-combine/issues",
   "dependencies": {
-    "@oclif/core": "^1",
+    "@oclif/core": "^2",
     "@oclif/plugin-help": "^5",
     "@oclif/plugin-plugins": "^2.0.1",
     "@types/js-yaml": "^4.0.5",
