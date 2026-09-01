@@ -2,7 +2,7 @@ import {dump, load} from "js-yaml";
 import {resolveRefs} from "json-refs";
 import fs from "fs";
 import path from "path";
-import mkdirp from "mkdirp";
+import {mkdirp} from "mkdirp";
 import {IObject, resolveCustomRefs} from "../util/refs";
 import {OutputType} from '../commands/merge'
 

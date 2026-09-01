@@ -1,6 +1,5 @@
-import {Command, Flags} from '@oclif/core'
+import {Command, Flags, ux} from '@oclif/core'
 import {mergeExecutor} from "../executor/mergeExecutor";
-import {cli} from "cli-ux";
 
 export type OutputType = 'yaml' | 'json';
 
@@ -39,9 +38,9 @@ export default class Merge extends Command {
   }
 
   async run(): Promise<void> {
-    cli.action.start('Starting');
+    ux.action.start('Starting');
     const {flags} = await this.parse(Merge)
     await mergeExecutor(<string>flags.input, <string>flags.output, <OutputType>flags.type)
-    cli.action.stop('Done');
+    ux.action.stop('Done');
   }
 }
