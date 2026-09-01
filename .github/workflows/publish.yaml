@@ -9,11 +9,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      # Setup .npmrc file to publish to npm
-      - uses: actions/setup-node@v3
+      - uses: jdx/mise-action@v4
         with:
-          node-version: '16.x'
-          registry-url: 'https://registry.npmjs.org'
+          install: true
+          cache: true
+      # Setup .npmrc file to publish to npm
+      - name: Setup npm registry auth
+        run: |
+          echo "registry=https://registry.npmjs.org/" > "${HOME}/.npmrc"
+          echo "//registry.npmjs.org/:_authToken=\${NODE_AUTH_TOKEN}" >> "${HOME}/.npmrc"
       - name: Set tag version
         id: ref_tag
         run: echo "::set-output name=version::${GITHUB_REF##*v}"
