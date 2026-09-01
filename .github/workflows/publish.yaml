@@ -20,7 +20,7 @@ jobs:
           echo "//registry.npmjs.org/:_authToken=\${NODE_AUTH_TOKEN}" >> "${HOME}/.npmrc"
       - name: Set tag version
         id: ref_tag
-        run: echo "::set-output name=version::${GITHUB_REF##*v}"
+        run: echo "version=${GITHUB_REF##*v}" >> "$GITHUB_OUTPUT"
       - name: Install dependencies
         run: yarn
       - name: Update package.json
