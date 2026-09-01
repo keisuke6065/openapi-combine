@@ -9,7 +9,6 @@
   "dependencies": {
     "@oclif/core": "^1",
     "@oclif/plugin-help": "^5",
-    "@oclif/plugin-plugins": "^2.0.1",
     "@types/js-yaml": "^4.0.5",
     "@types/lodash.get": "^4.4.7",
     "@types/lodash.set": "^4.3.7",
@@ -41,7 +40,7 @@
     "ts-node": "^10.8.0"
   },
   "engines": {
-    "node": ">=8.0.0"
+    "node": ">=22.0.0"
   },
   "files": [
     "/bin",
@@ -67,6 +66,7 @@
       "@oclif/plugin-help"
     ]
   },
+  "packageManager": "pnpm@10.15.0",
   "repository": "keisuke6065/openapi-combine",
   "scripts": {
     "start": "./bin/run",

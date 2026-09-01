@@ -8,7 +8,7 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - uses: jdx/mise-action@v4
         with:
           install: true
@@ -22,19 +22,19 @@ jobs:
         id: ref_tag
         run: echo "version=${GITHUB_REF##*v}" >> "$GITHUB_OUTPUT"
       - name: Install dependencies
-        run: yarn
+        run: pnpm install --frozen-lockfile
       - name: Update package.json
         run: |
-          yarn version --new-version ${RELEASE_VERSION} --no-git-tag-version
+          pnpm version "${RELEASE_VERSION}" --no-git-tag-version --allow-same-version
         env:
           RELEASE_VERSION: ${{ steps.ref_tag.outputs.version }}
       - name: Commit updates
-        uses: EndBug/add-and-commit@v7
+        uses: EndBug/add-and-commit@v9
         with:
           branch: master
           message: "Bump version: v${{ steps.ref_tag.outputs.version }}"
           add: "['package.json', 'README.md']"
-      - run: yarn publish
+      - run: pnpm publish --access public --no-git-checks
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       - name: Push to Docker Hub
