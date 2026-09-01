@@ -1,4 +1,4 @@
-FROM node:16-slim
+FROM node:24-slim
 LABEL maintainer="keisuke6065 <keisuke6065@gmail.com>"
 
 ARG VERSION
