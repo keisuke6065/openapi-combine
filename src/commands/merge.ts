@@ -38,9 +38,14 @@ export default class Merge extends Command {
   }
 
   async run(): Promise<void> {
-    ux.action.start('Starting');
     const {flags} = await this.parse(Merge)
-    await mergeExecutor(<string>flags.input, <string>flags.output, <OutputType>flags.type)
-    ux.action.stop('Done');
+    ux.action.start('Starting');
+    try {
+      await mergeExecutor(<string>flags.input, <string>flags.output, <OutputType>flags.type)
+      ux.action.stop('Done');
+    } catch (error) {
+      ux.action.stop('Failed');
+      throw error
+    }
   }
 }
