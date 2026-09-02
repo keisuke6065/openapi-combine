@@ -7,37 +7,32 @@
   },
   "bugs": "https://github.com/keisuke6065/openapi-combine/issues",
   "dependencies": {
-    "@oclif/core": "^1",
-    "@oclif/plugin-help": "^5",
-    "@types/js-yaml": "^4.0.5",
-    "@types/lodash.get": "^4.4.7",
-    "@types/lodash.set": "^4.3.7",
-    "@types/node": "^17.0.41",
-    "cli-ux": "^6.0.9",
-    "js-yaml": "^4.1.0",
+    "@oclif/core": "^5.0.0",
+    "@oclif/plugin-help": "^7.0.0",
+    "@types/lodash.get": "^4.4.9",
+    "@types/lodash.set": "^4.3.9",
+    "@types/node": "^24.13.3",
+    "js-yaml": "^5.4.1",
     "json-refs": "^3.0.15",
     "lodash.get": "^4.4.2",
     "lodash.set": "^4.3.2",
-    "mkdirp": "^1.0.4",
-    "tslib": "^2.4.0",
-    "typescript": "^4.4.4"
+    "mkdirp": "^3.0.1",
+    "tslib": "^2.8.1",
+    "typescript": "^5.9.3"
   },
   "devDependencies": {
-    "@oclif/dev-cli": "^1.26.10",
-    "@types/chai": "^4.3.1",
-    "@types/mkdirp": "^1.0.2",
-    "@types/mocha": "^9.1.1",
-    "@types/sinon": "^10.0.11",
-    "@typescript-eslint/eslint-plugin": "^5.26.0",
-    "@typescript-eslint/parser": "^5.26.0",
-    "chai": "^4.3.6",
-    "eslint": "^8.16.0",
-    "eslint-config-oclif": "^4.0.0",
-    "eslint-config-oclif-typescript": "^1.0.2",
-    "mocha": "^10.0.0",
-    "nyc": "^15.1.0",
-    "sinon": "^14.0.0",
-    "ts-node": "^10.8.0"
+    "@eslint/js": "^9.39.5",
+    "@types/chai": "^4.3.20",
+    "@types/mocha": "^10.0.10",
+    "@types/sinon": "^17.0.4",
+    "chai": "^4.5.0",
+    "eslint": "^9.39.5",
+    "mocha": "^12.0.0",
+    "nyc": "^18.0.0",
+    "oclif": "^5.0.0",
+    "sinon": "^22.1.0",
+    "ts-node": "^10.9.2",
+    "typescript-eslint": "^8.69.0"
   },
   "engines": {
     "node": ">=22.0.0"
@@ -71,13 +66,13 @@
   "scripts": {
     "start": "./bin/run",
     "build": "tsc -b",
-    "lint": "eslint -c .eslintrc 'src/**/*.ts'",
+    "lint": "eslint 'src/**/*.ts'",
     "postpack": "rm -f oclif.manifest.json",
-    "posttest": "eslint . --ext .ts --config .eslintrc",
-    "prepack": "rm -rf lib && tsc -b && oclif-dev manifest && oclif-dev readme",
+    "posttest": "eslint .",
+    "prepack": "rm -rf lib && tsc -b && oclif manifest && oclif readme",
     "test": "nyc --extension .ts mocha --forbid-only \"test/**/*.test.ts\"",
-    "version": "oclif-dev readme && git add README.md",
-    "readme": "oclif-dev readme"
+    "version": "oclif readme && git add README.md",
+    "readme": "oclif readme"
   },
   "types": "lib/index.d.ts"
 }
