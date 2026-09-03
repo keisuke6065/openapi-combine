@@ -3,7 +3,7 @@ info:
   version: 1.0.0
   title: Swagger Petstore
 servers:
-  - url: 'http://petstore.swagger.io/v1'
+  - url: http://petstore.swagger.io/v1
 paths:
   /pets:
     get:
@@ -58,7 +58,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/components/Error'
-  '/pets/{petId}':
+  /pets/{petId}:
     get:
       summary: Info for a specific pet
       operationId: showPetById
