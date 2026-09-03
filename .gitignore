@@ -26,3 +26,4 @@
 /tmp
 /build
 node_modules
+*.tsbuildinfo

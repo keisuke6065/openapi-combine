@@ -24,7 +24,10 @@ export const mergeExecutor = async (
   const baseDir = process.cwd()
   const inputParsedPath = path.parse(inputFile);
   const targetFilePath = path.join(baseDir, inputParsedPath.dir, inputParsedPath.base)
-  process.chdir(inputParsedPath.dir);
+  if (!fs.existsSync(targetFilePath)) {
+    throw new Error(`input file not found: ${inputFile}`)
+  }
+  process.chdir(inputParsedPath.dir || '.');
   const root = load(fs.readFileSync(targetFilePath).toString()) as IObject;
   const newVar = resolveCustomRefs(root);
   const refs = await resolveRefs([newVar], options);
