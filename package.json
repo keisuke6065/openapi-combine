@@ -62,7 +62,10 @@
     ]
   },
   "packageManager": "pnpm@10.15.0",
-  "repository": "keisuke6065/openapi-combine",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/keisuke6065/openapi-combine.git"
+  },
   "scripts": {
     "start": "./bin/run",
     "build": "tsc -b",

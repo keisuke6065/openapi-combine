@@ -3,9 +3,18 @@ on:
   release:
     types:
       - published
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Version to publish (e.g. 0.4.0). Defaults to the release tag."
+        required: true
+        type: string
 
 permissions:
   contents: write
+  # Required for npm trusted publishing (OIDC); npm mints its own short-lived
+  # credentials from this token, so no NPM_TOKEN secret is needed.
+  id-token: write
 
 jobs:
   publish:
@@ -20,14 +29,11 @@ jobs:
         with:
           install: true
           cache: true
-      # Setup .npmrc file to publish to npm
-      - name: Setup npm registry auth
-        run: |
-          echo "registry=https://registry.npmjs.org/" > "${HOME}/.npmrc"
-          echo "//registry.npmjs.org/:_authToken=\${NODE_AUTH_TOKEN}" >> "${HOME}/.npmrc"
       - name: Set tag version
         id: ref_tag
-        run: echo "version=${GITHUB_REF##*v}" >> "$GITHUB_OUTPUT"
+        run: echo "version=${INPUT_VERSION:-${GITHUB_REF##*v}}" >> "$GITHUB_OUTPUT"
+        env:
+          INPUT_VERSION: ${{ inputs.version }}
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
       - name: Update package.json
@@ -40,9 +46,10 @@ jobs:
         with:
           message: "Bump version: v${{ steps.ref_tag.outputs.version }}"
           add: "['package.json', 'README.md']"
-      - run: pnpm publish --access public --no-git-checks
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      # Publishes via npm trusted publishing: npm exchanges the Actions OIDC
+      # token for a short-lived credential and attaches provenance.
+      - name: Publish to npm
+        run: npm publish --access public
       - name: Push to Docker Hub
         run: |
           echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
