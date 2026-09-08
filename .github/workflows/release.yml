@@ -15,6 +15,13 @@ jobs:
   update_release_draft:
     runs-on: ubuntu-latest
     steps:
-      - uses: release-drafter/release-drafter@v5.19.0
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Update release draft
+        if: github.event_name == 'push'
+        uses: release-drafter/release-drafter@v7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Label pull request
+        if: github.event_name == 'pull_request'
+        uses: release-drafter/release-drafter/autolabeler@v7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
