@@ -51,7 +51,7 @@ $ npm install -g openapi-combine
 $ openapi-combine COMMAND
 running command...
 $ openapi-combine (--version)
-openapi-combine/0.3.1 linux-x64 node-v24.20.0
+openapi-combine/0.4.0 linux-x64 node-v24.20.0
 $ openapi-combine --help [COMMAND]
 USAGE
   $ openapi-combine COMMAND
@@ -61,7 +61,6 @@ USAGE
 # Commands
 <!-- commands -->
 * [`openapi-combine help [COMMAND]`](#openapi-combine-help-command)
-* [`openapi-combine merge`](#openapi-combine-merge)
 
 ## `openapi-combine help [COMMAND]`
 
@@ -82,27 +81,4 @@ DESCRIPTION
 ```
 
 _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/7.0.0/src/commands/help.ts)_
-
-## `openapi-combine merge`
-
-describe the command here
-
-```
-USAGE
-  $ openapi-combine merge -i <value> [-o <value>] [-t yaml|json]
-
-FLAGS
-  -i, --input=<value>   (required) input target yaml file
-  -o, --output=<value>  [default: ./output/openapi.yaml] output target yaml file
-  -t, --type=<option>   [default: yaml] output format yaml or json
-                        <options: yaml|json>
-
-DESCRIPTION
-  describe the command here
-
-EXAMPLES
-  $ openapi-combine merge -i ./example/openapi.yaml -o ./build/openapi.yaml
-```
-
-_See code: [src/commands/merge.ts](https://github.com/keisuke6065/openapi-combine/blob/v0.3.1/src/commands/merge.ts)_
 <!-- commandsstop -->
