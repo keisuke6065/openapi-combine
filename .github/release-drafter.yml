@@ -2,33 +2,48 @@ name-template: 'v$RESOLVED_VERSION'
 tag-template: 'v$RESOLVED_VERSION'
 categories:
   - title: '💣 Breaking changes'
-    label: 'breaking'
+    when:
+      label: 'breaking'
   - title: '🚀 Features'
-    label: 'enhancement'
+    when:
+      label: 'enhancement'
   - title: '🐛 Bug Fixes'
-    label: 'bug'
+    when:
+      label: 'bug'
   - title: '🧰 Maintenance'
-    label: 'chore'
+    when:
+      label: 'chore'
   - title: '🗒 Documentation'
-    label: 'documentation'
+    when:
+      label: 'documentation'
   - title: '🚀 Dependencies'
-    label: 'dependencies'
+    when:
+      label: 'dependencies'
+  - type: 'pre-exclude'
+    when:
+      label: 'skip-changelog'
+  # Version resolution. Changes matching no resolver fall back to the
+  # built-in default increment, which is 'patch'.
+  - type: 'version-resolver'
+    semver-increment: 'major'
+    when:
+      labels:
+        - 'major'
+  - type: 'version-resolver'
+    semver-increment: 'minor'
+    when:
+      labels:
+        - 'minor'
+        - 'enhancement'
+  - type: 'version-resolver'
+    semver-increment: 'patch'
+    when:
+      labels:
+        - 'patch'
+        - 'dependencies'
+        - 'bug'
 change-template: '- $TITLE @$AUTHOR (#$NUMBER)'
 change-title-escapes: '\<*_&' # You can add # and @ to disable mentions, and add ` to disable code blocks.
-version-resolver:
-  major:
-    labels:
-      - 'major'
-  minor:
-    labels:
-      - 'minor'
-      - 'enhancement'
-  patch:
-    labels:
-      - 'patch'
-      - 'dependencies'
-      - 'bug'
-  default: patch
 autolabeler:
   - label: 'chore'
     files:
@@ -45,8 +60,6 @@ autolabeler:
   - label: 'enhancement'
     branch:
       - '/feature\/.+/'
-exclude-labels:
-  - 'skip-changelog'
 template: |
   ## Changes
   $CHANGES
