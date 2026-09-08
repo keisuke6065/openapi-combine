@@ -4,11 +4,18 @@ on:
     types:
       - published
 
+permissions:
+  contents: write
+
 jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      # The release event checks out the tag in a detached HEAD state, which
+      # makes the version bump commit unpushable. Check out master explicitly.
+      - uses: actions/checkout@v7
+        with:
+          ref: master
       - uses: jdx/mise-action@v4
         with:
           install: true
@@ -29,9 +36,8 @@ jobs:
         env:
           RELEASE_VERSION: ${{ steps.ref_tag.outputs.version }}
       - name: Commit updates
-        uses: EndBug/add-and-commit@v9
+        uses: EndBug/add-and-commit@v11
         with:
-          branch: master
           message: "Bump version: v${{ steps.ref_tag.outputs.version }}"
           add: "['package.json', 'README.md']"
       - run: pnpm publish --access public --no-git-checks
