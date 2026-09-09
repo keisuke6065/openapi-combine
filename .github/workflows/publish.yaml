@@ -47,9 +47,13 @@ jobs:
           message: "Bump version: v${{ steps.ref_tag.outputs.version }}"
           add: "['package.json', 'README.md']"
       # Publishes via npm trusted publishing: npm exchanges the Actions OIDC
-      # token for a short-lived credential and attaches provenance.
-      - name: Publish to npm
-        run: npm publish --access public
+      # token for a short-lived credential and attaches provenance. The trusted
+      # publisher allows staged publishing only, so the version is staged here
+      # and a maintainer approves it with 2FA to make it public.
+      - name: Stage npm release
+        run: |
+          npm stage publish --access public
+          echo "::notice::Staged on npm. Approve it at https://www.npmjs.com/package/openapi-combine (or run 'npm stage list' then 'npm stage approve <stage-id>') to publish the version."
       - name: Push to Docker Hub
         run: |
           echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
