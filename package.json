@@ -61,7 +61,7 @@
       "@oclif/plugin-help"
     ]
   },
-  "packageManager": "pnpm@10.15.0",
+  "packageManager": "pnpm@10.34.5",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/keisuke6065/openapi-combine.git"
